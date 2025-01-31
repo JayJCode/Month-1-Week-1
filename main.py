@@ -5,11 +5,11 @@
 """
 
 with open("data.txt") as file:
-    data = file.read() # 1st part
-    num_of_words = len(data.replace("\n", " ").strip().split(" "))
+    data = file.read() # 1st part.
+    num_of_words = len(data.replace("\n", " ").strip().split(" ")) # 2nd part.
     num_of_lines = len(data.split("\n"))
     # user_input = input("Type key word, You are looking for: ")
-    index = data.index("key") # pass user_input if you want program to be more interactive and uncomment recent line.
+    index = data.index("key") # 3rd part. (Pass user_input if you want program to be more interactive and uncomment recent line).
     print(("Number of words: {}.\n" +
            "Number of lines: {}.\n" +
            "Index of searched word: {}.").format(num_of_words, num_of_lines, index))
