@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Week 1
 1) Program should read data.txt
@@ -9,21 +11,33 @@ Week 2
 5) Integrate at least one standard library (os/sys/datetime) in a meaningful way.
 6) Populate data in the text file you are working with by fetching it from an external API using requests.
 """
-import sys
+
+# Default python packages
 import os
 from datetime import datetime
 import argparse
 
+# pip installed python packages
+import requests
+
 # 4th part.
+"""
+Example use: py main.py -f data.txt -k name -c africa
+"""
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", "--file", help="The name of the file we filter through")
 parser.add_argument("-k", "--key", help="The key name or symbol to be filtered in file")
+parser.add_argument("-c", "--country", help="The country name of which data will be download to data.txt")
 args = parser.parse_args()
 
-# 5th part. Using sys to get file_name, and os to get some information about this file.
-# Lastly using datetime for changing format to a readable for human being
+# 6th part. Using REST countries, to get some information into data.txt
+base_url = "https://restcountries.com/v3.1/"
+r = requests.get(base_url + "name/{}".format(args.country))
 
-# file_name = sys.argv[1] // no longer in use, since we use argparse
+with open(args.file, "w", encoding="utf-8") as file:
+    file.write(r.text)
+
+# 5th part. Using os to get some information about this file and datetime for changing format to a readable for human being
 if not os.path.exists(args.file):
     print("There is not a such file")
     exit(1)
@@ -34,7 +48,7 @@ print(("ABOUT CHOSEN FILE:\n" +
        "File size: {}\n" +
        "Last modified: {}\n").format(args.file, file_size, file_mod_time))
 
-with open(args.file) as file:
+with open(args.file, "r", encoding="utf-8") as file:
     data = file.read() # 1st part.
     num_of_words = len(data.replace("\n", " ").strip().split(" ")) # 2nd part.
     num_of_lines = len(data.split("\n"))
