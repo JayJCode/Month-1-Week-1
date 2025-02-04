@@ -1,0 +1,4 @@
+# This is sample requirements.txt file
+# It lists all the dependencies for a python project
+
+requests==2.32.0
