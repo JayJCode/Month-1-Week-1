@@ -16,14 +16,13 @@ Week 3
 """
 
 import argparse
-import os
 
-from api_client import APIClient
-from file_manager import FileManager
+from src.api_client import APIClient
+from src.file_manager import FileManager
 
 def argparse_init():
     """
-    Example use: py main.py -f data.txt -k name -c region -v africa
+    Example use: py month1_exc/main.py -f month1_exc/src/data.txt -k name -c region -v africa
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file", help="The name of the file we filter through")
@@ -32,15 +31,8 @@ def argparse_init():
     parser.add_argument("-v", "--value", help="The value name of which data will be download to data.txt")
     return parser.parse_args()
 
-def check_file_path(args):
-    # Validate entries
-    if not os.path.exists(args.file):
-        print("This file path is not existing")
-        exit(1)
-
 def main():
     args = argparse_init()
-    check_file_path(args)
 
     # Get data from API
     api_client = APIClient()

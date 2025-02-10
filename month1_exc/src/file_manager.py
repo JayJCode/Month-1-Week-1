@@ -5,10 +5,14 @@ from datetime import datetime
 class FileManager:
     def __init__(self, file_path):
         self.__content__ = None
+        self.__error__ = None
         self.__file_path__ = file_path
 
     def get_content(self):
         return self.__content__
+
+    def get_error(self):
+        return self.__error__
 
     def get_path(self):
         return self.__file_path__
@@ -18,8 +22,12 @@ class FileManager:
             file.write(content)
 
     def read(self):
-        with open(self.__file_path__, "r", encoding="utf-8") as file:
-            self.__content__ = file.read()
+        try:
+            with open(self.__file_path__, "r", encoding="utf-8") as file:
+                self.__content__ = file.read()
+        except OSError as e:
+            self.__error__ = e.strerror
+            print(self.__error__)
 
     def get_file_info(self):
         # Gives info about: name, size, date of last modification
