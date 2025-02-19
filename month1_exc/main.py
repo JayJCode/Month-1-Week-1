@@ -13,6 +13,11 @@ Week 3
 1) Reorganize program (use functions, main etc.).
 2) Use classes (APIClient, FileManager).
 3) Create tests using pytest in separate folder (tests).
+
+Week 4
+1) Create a Dockerfile
+2) Build and run a docker image (docker build -t nazwa .) (docker run -d nazwa)
+3) Create a workflow file in .github/workflows/ci.yml (checks out code, installs dependencies, runs tests, builds docker image)
 """
 
 import argparse
