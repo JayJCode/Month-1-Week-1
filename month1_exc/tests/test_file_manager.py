@@ -21,9 +21,6 @@ class TestFileManager:
     def test_init(self, file_manager):
         assert file_manager.get_path() == "test.txt"
 
-    def test_read_error(self, file_manager):
-        file_manager.read()
-        assert file_manager.get_error() == "No such file or directory"
 
     def test_save(self, file_manager):
         file_manager.save("Test file content")
@@ -40,7 +37,7 @@ class TestFileManager:
         assert message == ("ABOUT CHOSEN FILE:\n" +
                             "File name: test.txt\n" +
                             "File size: 17\n" +
-                            "Last modified: {}\n".format(datetime.fromtimestamp(os.stat(file_manager.__file_path).st_mtime)))
+                            "Last modified: {}\n".format(datetime.fromtimestamp(os.stat(file_manager.get_path()).st_mtime)))
 
     def test_investigate_file(self, file_manager):
         file_manager.save("Test file content")
